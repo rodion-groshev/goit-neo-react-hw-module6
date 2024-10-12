@@ -1,8 +1,15 @@
 import css from "./Contact.module.css";
 import iconUser from "../../img/user.svg";
 import iconPhone from "../../img/phone.svg";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 
-const Contact = ({ contact, handleClick }) => {
+const Contact = ({ contact }) => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(deleteContact(contact.id));
+  };
+
   return (
     <div className={css.card}>
       <div className={css.cardOutline}>
@@ -15,11 +22,7 @@ const Contact = ({ contact, handleClick }) => {
           <p>{contact.number}</p>
         </div>
       </div>
-      <button
-        className={css.contactBtn}
-        onClick={() => handleClick(contact.id)}
-        type="button"
-      >
+      <button className={css.contactBtn} onClick={handleClick} type="button">
         Delete
       </button>
     </div>
